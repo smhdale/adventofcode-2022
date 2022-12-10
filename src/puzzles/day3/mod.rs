@@ -113,26 +113,22 @@ impl Rucksack {
 // PART 1
 // Find and sum values of items within each sack that are in both compartments
 
-fn find_duplicate_item(sack: &Rucksack) -> Option<&char> {
+fn find_duplicate_item(sack: &Rucksack) -> Option<char> {
     for item in sack.items() {
         if sack.exists_in_compartment(Compartment::Left, item)
             && sack.exists_in_compartment(Compartment::Right, item)
         {
-            return Some(item);
+            return Some(*item);
         }
     }
     None
 }
 
 fn sum_duplicate_item_priorities(sacks: &Vec<Rucksack>) -> usize {
-    let mut sum = 0;
-    for sack in sacks {
-        match find_duplicate_item(&sack) {
-            Some(c) => sum += get_item_priority(*c),
-            None => (),
-        };
-    }
-    sum
+    sacks
+        .iter()
+        .map(|s| find_duplicate_item(&s).map_or(0, get_item_priority))
+        .sum()
 }
 
 pub fn part1() {
@@ -166,21 +162,14 @@ fn find_badge(group: &[Rucksack]) -> Option<char> {
 }
 
 fn sum_badge_priorities(sacks: &Vec<Rucksack>) -> usize {
-    let groups = sacks.chunks(3);
-    let mut sum = 0;
-
-    for chunk in groups {
-        match find_badge(chunk) {
-            Some(c) => sum += get_item_priority(c),
-            None => (),
-        }
-    }
-
-    sum
+    sacks
+        .chunks(3)
+        .map(|group| find_badge(group).map_or(0, get_item_priority))
+        .sum()
 }
 
 pub fn part2() {
-    print::intro(3, 1);
+    print::intro(3, 2);
 
     let sacks = input::day_input::<Rucksack>(3);
     let sum_test = sum_badge_priorities(&sacks.test);
