@@ -7,6 +7,16 @@ use std::{
     str::FromStr,
 };
 
+pub struct DayInput<T> {
+    pub test: Vec<T>,
+    pub real: Vec<T>,
+}
+
+pub struct DayInputGrouped<T> {
+    pub test: Vec<Vec<T>>,
+    pub real: Vec<Vec<T>>,
+}
+
 fn lines_from_file<T>(filename: impl AsRef<Path>) -> Vec<T>
 where T: FromStr, <T as FromStr>::Err: Debug
 {
@@ -59,16 +69,24 @@ fn get_day_file(day: u8, file: &str) -> PathBuf {
     path
 }
 
-pub fn day_input<T: FromStr>(day: u8, file: &str) -> Vec<T>
+pub fn day_input<T: FromStr>(day: u8) -> DayInput<T>
 where T: FromStr, <T as FromStr>::Err: Debug
 {
-    let path = get_day_file(day, file);
-    lines_from_file::<T>(&path)
+    let test = get_day_file(day, "input_test.txt");
+    let real = get_day_file(day, "input.txt");
+    DayInput {
+        test: lines_from_file::<T>(&test),
+        real: lines_from_file::<T>(&real),
+    }
 }
 
-pub fn day_input_grouped<T: FromStr>(day: u8, file: &str) -> Vec<Vec<T>>
+pub fn day_input_grouped<T: FromStr>(day: u8) -> DayInputGrouped<T>
 where T: FromStr + Clone, <T as FromStr>::Err: Debug
 {
-    let path = get_day_file(day, file);
-    lines_from_file_grouped::<T>(&path)
+    let test = get_day_file(day, "input_test.txt");
+    let real = get_day_file(day, "input.txt");
+    DayInputGrouped {
+        test: lines_from_file_grouped::<T>(&test),
+        real: lines_from_file_grouped::<T>(&real),
+    }
 }

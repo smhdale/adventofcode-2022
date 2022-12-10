@@ -1,7 +1,7 @@
 use crate::input;
 use crate::print;
 
-fn find_max_calories(elves: Vec<Vec<usize>>) -> usize {
+fn find_max_calories(elves: &Vec<Vec<usize>>) -> usize {
 	let mut max: usize = 0;
 	for elf in elves {
 		let sum = elf.iter().sum();
@@ -12,7 +12,7 @@ fn find_max_calories(elves: Vec<Vec<usize>>) -> usize {
 	max
 }
 
-fn sum_calories(elves: Vec<Vec<usize>>) -> Vec<usize> {
+fn sum_calories(elves: &Vec<Vec<usize>>) -> Vec<usize> {
 	elves.iter().map(|elf| elf.iter().sum()).collect()
 }
 
@@ -20,23 +20,21 @@ fn sum_calories(elves: Vec<Vec<usize>>) -> Vec<usize> {
 // Find the elf holding the most calories worth of food, and sum their total
 pub fn part1() {
 	print::intro(1, 1);
+	let data = input::day_input_grouped::<usize>(1);
 
-	let elves_test = input::day_input_grouped::<usize>(1, "input_test.txt");
-	let elves = input::day_input_grouped::<usize>(1, "input.txt");
+	let max_test = find_max_calories(&data.test);
+	let max = find_max_calories(&data.real);
 
-	let max_test = find_max_calories(elves_test);
-	let max = find_max_calories(elves);
-
-	print::answer_with_test(max_test, max);
+	print::answer_with_test(max, max_test);
 }
 
 // PART 2
 // Find the top three elves with the most calories, and sum the total
 pub fn part2() {
 	print::intro(1, 2);
+	let data = input::day_input_grouped::<usize>(1);
 
-	let elves = input::day_input_grouped::<usize>(1, "input.txt");
-	let mut totals = sum_calories(elves);
+	let mut totals = sum_calories(&data.real);
 	totals.sort_unstable();
 	totals.reverse();
 
