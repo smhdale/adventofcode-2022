@@ -18,7 +18,9 @@ pub struct DayInputGrouped<T> {
 }
 
 fn lines_from_file<T>(filename: impl AsRef<Path>) -> Vec<T>
-where T: FromStr, <T as FromStr>::Err: Debug
+where
+    T: FromStr,
+    <T as FromStr>::Err: Debug,
 {
     let file = File::open(filename).expect("File not found");
     let lines = BufReader::new(file).lines();
@@ -30,13 +32,15 @@ where T: FromStr, <T as FromStr>::Err: Debug
         if trimmed.len() > 0 {
             data.push(trimmed.parse::<T>().unwrap());
         }
-    };
+    }
 
     data
 }
 
 fn lines_from_file_grouped<T>(filename: impl AsRef<Path>) -> Vec<Vec<T>>
-where T: FromStr + Clone, <T as FromStr>::Err: Debug
+where
+    T: FromStr + Clone,
+    <T as FromStr>::Err: Debug,
 {
     let file = File::open(filename).expect("File not found");
     let lines = BufReader::new(file).lines();
@@ -53,7 +57,7 @@ where T: FromStr + Clone, <T as FromStr>::Err: Debug
             data.push(group.to_vec());
             group.clear();
         }
-    };
+    }
 
     data
 }
@@ -70,7 +74,9 @@ fn get_day_file(day: u8, file: &str) -> PathBuf {
 }
 
 pub fn day_input<T: FromStr>(day: u8) -> DayInput<T>
-where T: FromStr, <T as FromStr>::Err: Debug
+where
+    T: FromStr,
+    <T as FromStr>::Err: Debug,
 {
     let test = get_day_file(day, "input_test.txt");
     let real = get_day_file(day, "input.txt");
@@ -81,7 +87,9 @@ where T: FromStr, <T as FromStr>::Err: Debug
 }
 
 pub fn day_input_grouped<T: FromStr>(day: u8) -> DayInputGrouped<T>
-where T: FromStr + Clone, <T as FromStr>::Err: Debug
+where
+    T: FromStr + Clone,
+    <T as FromStr>::Err: Debug,
 {
     let test = get_day_file(day, "input_test.txt");
     let real = get_day_file(day, "input.txt");
