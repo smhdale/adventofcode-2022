@@ -101,7 +101,7 @@ impl Rucksack {
 
     // Checks if an item exists in the rucksack
     fn exists(&self, item: &char) -> bool {
-        return self._set.contains(item);
+        self._set.contains(item)
     }
 
     // Allows iterating all items in the rucksack
@@ -124,10 +124,10 @@ fn find_duplicate_item(sack: &Rucksack) -> Option<char> {
     None
 }
 
-fn sum_duplicate_item_priorities(sacks: &Vec<Rucksack>) -> usize {
+fn sum_duplicate_item_priorities(sacks: &[Rucksack]) -> usize {
     sacks
         .iter()
-        .map(|s| find_duplicate_item(&s).map_or(0, get_item_priority))
+        .map(|s| find_duplicate_item(s).map_or(0, get_item_priority))
         .sum()
 }
 
@@ -161,7 +161,7 @@ fn find_badge(group: &[Rucksack]) -> Option<char> {
     }
 }
 
-fn sum_badge_priorities(sacks: &Vec<Rucksack>) -> usize {
+fn sum_badge_priorities(sacks: &[Rucksack]) -> usize {
     sacks
         .chunks(3)
         .map(|group| find_badge(group).map_or(0, get_item_priority))

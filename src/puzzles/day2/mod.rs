@@ -34,8 +34,7 @@ impl FromStr for RoundInputs {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let mut chars = s
             .split_ascii_whitespace()
-            .map(|c| c.chars().next().unwrap())
-            .into_iter();
+            .map(|c| c.chars().next().unwrap());
         let opponent = chars.next().expect("Missing player move");
         let player = chars.next().expect("Missing opponent move");
         Ok(RoundInputs { player, opponent })
@@ -70,7 +69,7 @@ fn simulate_round(actions: &RoundActions) -> isize {
 fn simulate_tournament(rounds: &Vec<RoundInputs>, action_resolver: &ActionResolver) -> isize {
     let mut score = 0;
     for round in rounds {
-        let actions = action_resolver(&round);
+        let actions = action_resolver(round);
         score += simulate_round(&actions);
     }
     score
@@ -123,7 +122,7 @@ fn resolve_for_outcome(inputs: &RoundInputs) -> RoundActions {
         }
         'Y' => {
             // Should draw
-            opponent.clone()
+            opponent
         }
         _ => {
             // Should win

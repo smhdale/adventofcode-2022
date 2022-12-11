@@ -29,7 +29,7 @@ where
     for line in lines {
         let value = line.unwrap();
         let trimmed = value.trim();
-        if trimmed.len() > 0 {
+        if !trimmed.is_empty() {
             data.push(trimmed.parse::<T>().unwrap());
         }
     }
@@ -51,9 +51,9 @@ where
     for line in lines {
         let value = line.unwrap();
         let trimmed = value.trim();
-        if trimmed.len() > 0 {
+        if !trimmed.is_empty() {
             group.push(trimmed.parse::<T>().unwrap());
-        } else if group.len() > 0 {
+        } else if !group.is_empty() {
             data.push(group.to_vec());
             group.clear();
         }
@@ -67,8 +67,8 @@ fn get_day_file(day: u8, file: &str) -> PathBuf {
     let day = format!("day{}", day);
 
     path.push("src/puzzles");
-    path.push(&day);
-    path.push(&file);
+    path.push(day);
+    path.push(file);
 
     path
 }

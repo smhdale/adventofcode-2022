@@ -1,7 +1,7 @@
 use crate::input;
 use crate::print;
 
-fn find_max_calories(elves: &Vec<Vec<usize>>) -> usize {
+fn find_max_calories(elves: &[Vec<usize>]) -> usize {
     let mut max: usize = 0;
     for elf in elves {
         let sum = elf.iter().sum();
@@ -12,7 +12,7 @@ fn find_max_calories(elves: &Vec<Vec<usize>>) -> usize {
     max
 }
 
-fn sum_calories(elves: &Vec<Vec<usize>>) -> Vec<usize> {
+fn sum_calories(elves: &[Vec<usize>]) -> Vec<usize> {
     elves.iter().map(|elf| elf.iter().sum()).collect()
 }
 
