@@ -28,9 +28,8 @@ where
 
     for line in lines {
         let value = line.unwrap();
-        let trimmed = value.trim();
-        if !trimmed.is_empty() {
-            data.push(trimmed.parse::<T>().unwrap());
+        if !value.is_empty() {
+            data.push(value.parse::<T>().unwrap());
         }
     }
 
@@ -50,13 +49,17 @@ where
 
     for line in lines {
         let value = line.unwrap();
-        let trimmed = value.trim();
-        if !trimmed.is_empty() {
-            group.push(trimmed.parse::<T>().unwrap());
+        if !value.is_empty() {
+            group.push(value.parse::<T>().unwrap());
         } else if !group.is_empty() {
             data.push(group.to_vec());
             group.clear();
         }
+    }
+
+    // Ensure final group is pushed if no newline at end of file
+    if !group.is_empty() {
+        data.push(group.to_vec());
     }
 
     data
