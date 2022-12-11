@@ -13,4 +13,7 @@ fn main() {
 
     puzzles::day3::part1();
     puzzles::day3::part2();
+
+    puzzles::day4::part1();
+    puzzles::day4::part2();
 }
