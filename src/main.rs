@@ -20,6 +20,9 @@ fn main() {
     // puzzles::day5::part1();
     // puzzles::day5::part2();
 
-    puzzles::day6::part1();
-    puzzles::day6::part2();
+    // puzzles::day6::part1();
+    // puzzles::day6::part2();
+
+    puzzles::day7::part1();
+    puzzles::day7::part2();
 }
