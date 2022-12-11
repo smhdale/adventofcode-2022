@@ -14,7 +14,7 @@ struct Range {
 
 impl FromStr for Range {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let mut parts = s.split("-");
+        let mut parts = s.split('-');
         let from: isize = parts.next().unwrap().parse().expect("Invalid range");
         let to: isize = parts.next().unwrap().parse().expect("Invalid range");
 
@@ -30,7 +30,7 @@ impl FromStr for Range {
 impl Range {
     pub fn contains(&self, other: &Range) -> bool {
         for area in &other.areas {
-            if !self.areas.contains(&area) {
+            if !self.areas.contains(area) {
                 return false;
             }
         }
@@ -39,7 +39,7 @@ impl Range {
 
     pub fn overlaps(&self, other: &Range) -> bool {
         for area in &other.areas {
-            if self.areas.contains(&area) {
+            if self.areas.contains(area) {
                 return true;
             }
         }
@@ -57,7 +57,7 @@ struct RangePair {
 
 impl FromStr for RangePair {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let mut ranges = s.split(",");
+        let mut ranges = s.split(',');
         let a = ranges
             .next()
             .unwrap()
