@@ -7,6 +7,11 @@ use std::{
     str::FromStr,
 };
 
+pub struct RawInput {
+    pub test: String,
+    pub real: String,
+}
+
 pub struct DayInput<T> {
     pub test: Vec<T>,
     pub real: Vec<T>,
@@ -15,6 +20,15 @@ pub struct DayInput<T> {
 pub struct DayInputGrouped<T> {
     pub test: Vec<Vec<T>>,
     pub real: Vec<Vec<T>>,
+}
+
+fn raw_from_file(filename: impl AsRef<Path>) -> String {
+    let file = File::open(filename).expect("File not found");
+    let mut data = String::new();
+    BufReader::new(file)
+        .read_to_string(&mut data)
+        .expect("Failed to read file");
+    data
 }
 
 fn lines_from_file<T>(filename: impl AsRef<Path>) -> Vec<T>
@@ -74,6 +88,15 @@ fn get_day_file(day: u8, file: &str) -> PathBuf {
     path.push(file);
 
     path
+}
+
+pub fn day_input_raw(day: u8) -> RawInput {
+    let test = get_day_file(day, "input_test.txt");
+    let real = get_day_file(day, "input.txt");
+    RawInput {
+        test: raw_from_file(&test),
+        real: raw_from_file(&real),
+    }
 }
 
 pub fn day_input<T: FromStr>(day: u8) -> DayInput<T>
