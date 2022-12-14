@@ -26,6 +26,9 @@ fn main() {
     // puzzles::day7::part1();
     // puzzles::day7::part2();
 
-    puzzles::day8::part1();
-    puzzles::day8::part2();
+    // puzzles::day8::part1();
+    // puzzles::day8::part2();
+
+    puzzles::day9::part1();
+    puzzles::day9::part2();
 }
