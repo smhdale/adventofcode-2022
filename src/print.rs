@@ -11,3 +11,7 @@ pub fn answer<T: Display>(value: T) {
 pub fn answer_with_test<T: Display>(value: T, value_test: T) {
     println!("Test:   {}\nAnswer: {}\n", value_test, value);
 }
+
+pub fn answer_with_test_newline<T: Display>(value: T, value_test: T) {
+    println!("Test:\n{}\n\nAnswer:\n{}\n", value_test, value);
+}
