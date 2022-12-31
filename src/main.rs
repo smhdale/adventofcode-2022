@@ -32,6 +32,9 @@ fn main() {
     // puzzles::day9::part1();
     // puzzles::day9::part2();
 
-    puzzles::day10::part1();
-    puzzles::day10::part2();
+    // puzzles::day10::part1();
+    // puzzles::day10::part2();
+
+    puzzles::day11::part1();
+    puzzles::day11::part2();
 }
